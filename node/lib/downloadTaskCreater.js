@@ -243,7 +243,7 @@ class TaskManager {
     console.log('进行下载调度...')
     if (this.pause) return this.recordInfor('下载任务已暂停')
     if (this.finishCount === this.worklist.length) return this.recordInfor('文件全部下载结束')
-    if (this.downloading.length >= 2) return this.recordInfor('任务下载队列已满')
+    if (this.downloading.length >= 1) return this.recordInfor('任务下载队列已满')
     if (this.downloadIndex === this.worklist.length) return this.recordInfor('所有文件下载调度完成')
     this.recordInfor(`正在调度第 ${this.downloadIndex + 1} 个文件,总共 ${this.worklist.length} 个`)
     const _this = this
@@ -675,7 +675,7 @@ class DownloadFileSTM extends STM {
       _this.wrapper.seek += gap
       this.wrapper.manager.completeSize += gap
       this.wrapper.lastTimeSize = stream.bytesWritten
-			// console.log('一段文件写入完成 当前seek位置为 ：' + (_this.wrapper.seek/_this.wrapper.size * 100).toFixed(2) + '% 增加了 ：' + gap/this.wrapper.size *100 )
+			console.log('一段文件写入完成 当前seek位置为 ：' + (_this.wrapper.seek/_this.wrapper.size * 100).toFixed(2) + '% 增加了 ：' + gap/this.wrapper.size *100 )
       wrapper.manager.updateStore()
     })
 
